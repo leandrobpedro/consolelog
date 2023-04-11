@@ -1,0 +1,6 @@
+# Arquivos de dominio
+*.dom
+
+# logs
+*.log
+*.txt
