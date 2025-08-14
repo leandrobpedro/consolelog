@@ -1,35 +1,44 @@
 # Elipse E3/Power Console Log
-Janela de saída de mensagens para Elipse E3/Power.
 
-## Como usar
+Library for managing logs in Elipse E3/Power. Allows displaying messages in a console window, storing them internally, and exporting to a text file.
 
-### Configuração
-- Adicione a biblioteca `consolelog.lib` ao seu domínio.
-- Instancie o xobject `Console` a um `DataServer` presente em algum `.prj` do domínio.
-- Instancie o xcontrol `Output` a uma tela e, associe a propriedade `.Console` presente na janela de propriedades do xcontrol ao xobject adicionado no passo anterior, por exemplo, `Dados.Console1`.
+---
 
-### Utilização
-Para escrever um *log* na janela de saída, basta escrever a mensagem desejada na propriedade `.WriteLine` do xobject `Console`, exemplo:
+## How to Use
+
+### 1. Setup
+
+1. Add the `consolelog.lib` library to your domain.
+2. Instantiate the `Console Log Engine` xObject in a `DataServer` within any project (`.prj`) in the domain.
+3. Instantiate the `Immediate window` xControl on a screen and link its `.Console` property to the previously created xObject, for example:
+   ```
+   Data.consolelog_Engine1
+   ```
+
+### 2. Usage
+
+To write a message to the console, use the `.WriteLine` property of the `ConsoleLog` xObject:
+
 ```vbs
-Sub Foo()
-  Dim xo
-  Set xo = Application.GetObject("Dados.Console1") 
-  xo.WriteLine = "Minha mensagem"
+Sub ExampleMessage()
+    Dim consoleLog
+    Set consoleLog = Application.GetObject("Data.consolelog_Engine1")
+    consoleLog.WriteLine = "Starting verification process..."
 End Sub
 ```
-Ou crie uma `Sub`:
+
+Or create a helper function for simpler usage:
+
 ```vbs
-Sub Foo()
-  WriteLine "Foo..."
+Sub WriteLog(ByVal message)
+    Dim consoleLog
+    Set consoleLog = Application.GetObject("Data.ConsoleLog1")
+    consoleLog.WriteLine = message
 End Sub
 
-Sub Bar()
-  WriteLine "Bar..."
-End Sub
-
-Sub WriteLine( ByVal s )
-  Dim xo
-  Set xo = Application.GetObject("Dados.Console1") 
-  xo.WriteLine = s
+Sub ProcessData()
+    WriteLog "Processing started"
+    ' processing code...
+    WriteLog "Processing completed successfully"
 End Sub
 ```
