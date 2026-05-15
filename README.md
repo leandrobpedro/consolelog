@@ -1,6 +1,28 @@
 # Elipse E3/Power Console Log
 Message output window for Elipse E3/Power.
 
+## Dependencies
+
+The output control uses `MSCOMCTL.OCX`. This repository includes the OCX file, but it must be registered on each Windows machine before the screen can load the control.
+
+Open Command Prompt as administrator, go to this project folder, and run the command that matches your Windows installation:
+
+```bat
+cd C:\path\to\consolelog
+```
+
+On 64-bit Windows:
+
+```bat
+C:\Windows\SysWOW64\regsvr32.exe MSCOMCTL.OCX
+```
+
+On 32-bit Windows:
+
+```bat
+C:\Windows\System32\regsvr32.exe MSCOMCTL.OCX
+```
+
 ## How to use
 
 ### Setup
